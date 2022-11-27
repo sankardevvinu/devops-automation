@@ -21,13 +21,18 @@ pipeline {
         stage('Push image to Hub'){
             steps{
                 script{
-                   //withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
                    sh 'docker tag sankardev/task:version2 vinuinstinct123/sankardev:version2'
                    sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin docker.io'
-}
                    sh 'docker push vinuinstinct123/sankardev:version2'
                 }
             }
         }
-    }
+	stage('Deploy to cluster') {
+          steps {
+             script { 
+	       kubernetesDeploy(configs:"project.yaml",kubeconfigId:"kuber")
+        }
+      }
+    }		 
+}
 
