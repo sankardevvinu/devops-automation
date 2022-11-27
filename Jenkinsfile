@@ -8,7 +8,7 @@ pipeline {
             steps{
                 //checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sankardevvinu/devops-automation.git']]])
                 git branch: 'main', url: 'https://github.com/sankardevvinu/projectsupport.git'
-                sh 'mvn clean install'
+                
             }
         }
         stage('Build docker image'){
