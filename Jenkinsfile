@@ -8,7 +8,7 @@ pipeline {
         stage('Build Maven'){
             steps{
 		def mvnHome = tool name: 'maven', type: 'maven'
-		sh "${mvnHome}/bin/mvn -B -DskipTests clean package"
+		sh "${mvnHome}/bin/mvn -B package"
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sankardevvinu/devops-automation.git']]])
                 //git branch: 'main', url: 'https://github.com/sankardevvinu/devops-automation.git'
 		
