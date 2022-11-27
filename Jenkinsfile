@@ -1,13 +1,16 @@
 pipeline {
     agent any
+    tools{
+        maven 'maven_3_5_0'
+    }
      environment {
 		dockerhub=credentials('docker')
 	}   
     stages{
         stage('Build Maven'){
             steps{
-                //checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sankardevvinu/devops-automation.git']]])
-                git branch: 'main', url: 'https://github.com/sankardevvinu/devops-automation.git'
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sankardevvinu/devops-automation.git']]])
+                //git branch: 'main', url: 'https://github.com/sankardevvinu/devops-automation.git'
                 sh 'mvnm clean install'
             }
         }
