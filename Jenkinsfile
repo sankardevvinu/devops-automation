@@ -14,7 +14,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t java/devops-integration:version1 .'
+                    sh "docker build -t sankardev/task:version2 ."
                 }
             }
         }
@@ -22,10 +22,10 @@ pipeline {
             steps{
                 script{
                    //withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
-                   sh 'docker tag java/devops-integration:version1 java-project/devops-integration:version1'
+                   sh 'docker tag sankardev/task:version2 vinuinstinct123/sankardev:version2'
                    sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin docker.io'
 }
-                   sh 'docker push java-project/devops-integration:version1'
+                   sh 'docker push vinuinstinct123/sankardev:version2'
                 }
             }
         }
