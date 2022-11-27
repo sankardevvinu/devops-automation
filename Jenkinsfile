@@ -9,9 +9,10 @@ pipeline {
             steps{
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sankardevvinu/devops-automation.git']]])
                 //git branch: 'main', url: 'https://github.com/sankardevvinu/devops-automation.git'
-		withMaven(maven: 'mvn') {
-                sh 'mvn clean install'
-            }
+		def mvnHome = tool name: 'Apache Maven 3.5.0', type: 'maven'
+                sh "${mvnHome}/bin/mvn -B -DskipTests clean package"
+                //sh 'mvn clean install'
+            
 	  }
         }
         stage('Build docker image'){
