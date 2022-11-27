@@ -30,7 +30,7 @@ pipeline {
 	stage('Deploy to cluster') {
           steps {
              script { 
-	       kubernetesDeploy(configs:"project.yaml",kubeconfigId:"kubernetes")
+	       kubernetesDeploy(configs:"deploymentservice.yaml",kubeconfigId:"kubernetes")
         }
       }
     }		 
